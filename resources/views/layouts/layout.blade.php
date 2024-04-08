@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andimob | Management</title>
+    <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}">
     @vite('resources/css/app.css')
 </head>
 
@@ -40,7 +41,7 @@
     }
 </style>
 
-<body class="min-h-screen relative">
+<body class="md:min-h-screen relative">
     <div class="absolute w-screen hidden justify-center h-screen top-0 bg-white" id="hamburgerMenu">
         <div class="relative w-[80%] h-full">
             <div class="flex justify-between items-center mt-12">
@@ -51,25 +52,25 @@
             </div>
             <div class="flex flex-col justify-between h-[calc(100vh-400px)] mt-12">
                 <div class="flex justify-between items-center">
-                    <li class="text-4xl list-none" id="menuHover"><a href="index.php" class="font-bold">ACASA</a></li>
+                    <li class="text-4xl list-none" id="menuHover"><a href="https://andimob.ro/index.php" class="font-bold">ACASA</a></li>
                     <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.1966 39.2608C26.9224 39.1474 26.6881 38.9551 26.5233 38.7085C26.3584 38.4619 26.2704 38.1719 26.2703 37.8752V25.8752L8.27031 25.8752C7.87248 25.8752 7.49095 25.7172 7.20964 25.4359C6.92834 25.1546 6.77031 24.773 6.77031 24.3752C6.77031 23.9774 6.92834 23.5958 7.20964 23.3145C7.49095 23.0332 7.87248 22.8752 8.27031 22.8752H26.2703V10.8752C26.2701 10.5784 26.3579 10.2881 26.5227 10.0412C26.6875 9.79434 26.9219 9.6019 27.1961 9.48827C27.4704 9.37464 27.7721 9.34494 28.0633 9.40291C28.3544 9.46089 28.6218 9.60394 28.8316 9.81395L42.3316 23.314C42.471 23.4533 42.5817 23.6187 42.6571 23.8008C42.7326 23.9829 42.7715 24.1781 42.7715 24.3752C42.7715 24.5723 42.7326 24.7675 42.6571 24.9496C42.5817 25.1317 42.471 25.2971 42.3316 25.4365L28.8316 38.9365C28.6217 39.1462 28.3543 39.2889 28.0633 39.3467C27.7722 39.4044 27.4706 39.3745 27.1966 39.2608Z" fill="black" />
                     </svg>
                 </div>
                 <div class="flex justify-between items-center">
-                    <li class="text-4xl list-none" id="menuHover"><a href="properties.php?sel_type=0&sel_imb=0&sel_loc=0" class="font-bold">PROPRIETATI</a></li>
+                    <li class="text-4xl list-none" id="menuHover"><a href="https://andimob.ro/properties.php?sel_type=0&sel_imb=0&sel_loc=0" class="font-bold">PROPRIETATI</a></li>
                     <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.1966 39.2608C26.9224 39.1474 26.6881 38.9551 26.5233 38.7085C26.3584 38.4619 26.2704 38.1719 26.2703 37.8752V25.8752L8.27031 25.8752C7.87248 25.8752 7.49095 25.7172 7.20964 25.4359C6.92834 25.1546 6.77031 24.773 6.77031 24.3752C6.77031 23.9774 6.92834 23.5958 7.20964 23.3145C7.49095 23.0332 7.87248 22.8752 8.27031 22.8752H26.2703V10.8752C26.2701 10.5784 26.3579 10.2881 26.5227 10.0412C26.6875 9.79434 26.9219 9.6019 27.1961 9.48827C27.4704 9.37464 27.7721 9.34494 28.0633 9.40291C28.3544 9.46089 28.6218 9.60394 28.8316 9.81395L42.3316 23.314C42.471 23.4533 42.5817 23.6187 42.6571 23.8008C42.7326 23.9829 42.7715 24.1781 42.7715 24.3752C42.7715 24.5723 42.7326 24.7675 42.6571 24.9496C42.5817 25.1317 42.471 25.2971 42.3316 25.4365L28.8316 38.9365C28.6217 39.1462 28.3543 39.2889 28.0633 39.3467C27.7722 39.4044 27.4706 39.3745 27.1966 39.2608Z" fill="black" />
                     </svg>
                 </div>
                 <div class="flex justify-between items-center">
-                    <li class="text-4xl list-none" id="menuHover"><a href="about.php" class="font-bold">DESPRE NOI</a></li>
+                    <li class="text-4xl list-none" id="menuHover"><a href="https://andimob.ro/about.php" class="font-bold">DESPRE NOI</a></li>
                     <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.1966 39.2608C26.9224 39.1474 26.6881 38.9551 26.5233 38.7085C26.3584 38.4619 26.2704 38.1719 26.2703 37.8752V25.8752L8.27031 25.8752C7.87248 25.8752 7.49095 25.7172 7.20964 25.4359C6.92834 25.1546 6.77031 24.773 6.77031 24.3752C6.77031 23.9774 6.92834 23.5958 7.20964 23.3145C7.49095 23.0332 7.87248 22.8752 8.27031 22.8752H26.2703V10.8752C26.2701 10.5784 26.3579 10.2881 26.5227 10.0412C26.6875 9.79434 26.9219 9.6019 27.1961 9.48827C27.4704 9.37464 27.7721 9.34494 28.0633 9.40291C28.3544 9.46089 28.6218 9.60394 28.8316 9.81395L42.3316 23.314C42.471 23.4533 42.5817 23.6187 42.6571 23.8008C42.7326 23.9829 42.7715 24.1781 42.7715 24.3752C42.7715 24.5723 42.7326 24.7675 42.6571 24.9496C42.5817 25.1317 42.471 25.2971 42.3316 25.4365L28.8316 38.9365C28.6217 39.1462 28.3543 39.2889 28.0633 39.3467C27.7722 39.4044 27.4706 39.3745 27.1966 39.2608Z" fill="black" />
                     </svg>
                 </div>
                 <div class="flex justify-between items-center">
-                    <li class="text-4xl list-none" id="menuHover"><a href="contact.php" class="font-bold">CONTACT</a></li>
+                    <li class="text-4xl list-none" id="menuHover"><a href="https://andimob.ro/contact.php" class="font-bold">CONTACT</a></li>
                     <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.1966 39.2608C26.9224 39.1474 26.6881 38.9551 26.5233 38.7085C26.3584 38.4619 26.2704 38.1719 26.2703 37.8752V25.8752L8.27031 25.8752C7.87248 25.8752 7.49095 25.7172 7.20964 25.4359C6.92834 25.1546 6.77031 24.773 6.77031 24.3752C6.77031 23.9774 6.92834 23.5958 7.20964 23.3145C7.49095 23.0332 7.87248 22.8752 8.27031 22.8752H26.2703V10.8752C26.2701 10.5784 26.3579 10.2881 26.5227 10.0412C26.6875 9.79434 26.9219 9.6019 27.1961 9.48827C27.4704 9.37464 27.7721 9.34494 28.0633 9.40291C28.3544 9.46089 28.6218 9.60394 28.8316 9.81395L42.3316 23.314C42.471 23.4533 42.5817 23.6187 42.6571 23.8008C42.7326 23.9829 42.7715 24.1781 42.7715 24.3752C42.7715 24.5723 42.7326 24.7675 42.6571 24.9496C42.5817 25.1317 42.471 25.2971 42.3316 25.4365L28.8316 38.9365C28.6217 39.1462 28.3543 39.2889 28.0633 39.3467C27.7722 39.4044 27.4706 39.3745 27.1966 39.2608Z" fill="black" />
                     </svg>
@@ -82,10 +83,10 @@
             <div class="flex justify-between items-center">
                 <img src="{{URL::asset('assets/img/logo.png')}}" class="w-[125px]" alt="Logo">
                 <div class="text-lg hidden md:block">
-                    <a href="index.php" class="text-white mr-5 hover:text-[#D57B01]">ACASA</a>
-                    <a href="properties.php?sel_type=0&sel_imb=0&sel_loc=0" class="text-white mr-5 hover:text-[#D57B01]">PROPRIETATI</a>
-                    <a href="about.php" class="text-white mr-5 hover:text-[#D57B01]">DESPRE NOI</a>
-                    <a href="contact.php" class="text-white mr-5 hover:text-[#D57B01]">CONTACT</a>
+                    <a href="https://andimob.ro/index.php" class="text-white mr-5 hover:text-[#D57B01]">ACASA</a>
+                    <a href="https://andimob.ro/properties.php?sel_type=0&sel_imb=0&sel_loc=0" class="text-white mr-5 hover:text-[#D57B01]">PROPRIETATI</a>
+                    <a href="https://andimob.ro/about.php" class="text-white mr-5 hover:text-[#D57B01]">DESPRE NOI</a>
+                    <a href="https://andimob.ro/contact.php" class="text-white mr-5 hover:text-[#D57B01]">CONTACT</a>
                 </div>
                 <div class="block md:hidden">
                     <svg width="32" height="16" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="openMenu()">
@@ -98,7 +99,7 @@
         </div>
     </div>
     @yield('content')
-    <div class="w-full flex justify-center mt-20 bg-[#222222] absolute bottom-0">
+    <div class="w-full flex justify-center mt-20 bg-[#222222] bottom-0">
         <div class="w-full mx-2 max-w-[90rem] py-10 grid-cols-1 grid sm:grid-cols-3">
             <div class="flex flex-col justify-center items-center">
                 <img src="{{URL::asset('assets/img/logo.png')}}" class="w-[125px]" alt="Logo">
@@ -122,6 +123,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="{{URL::asset('assets/js/main.js')}}"></script>
 </body>
 
 </html>
