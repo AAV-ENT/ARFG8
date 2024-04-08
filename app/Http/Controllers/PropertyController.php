@@ -147,7 +147,8 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function modify($id)
+    public function create()
     {
+        return view('create');
     }
 }

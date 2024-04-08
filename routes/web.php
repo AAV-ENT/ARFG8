@@ -6,3 +6,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PropertyController::class, 'index']);
 
 Route::get('/modify/{id}', [PropertyController::class, 'modify']);
+
+Route::get('/create', [PropertyController::class, 'create']);
