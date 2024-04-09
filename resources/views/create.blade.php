@@ -3,26 +3,32 @@
 @section('content')
 <div class="w-full flex justify-center">
     <div class="w-full mx-2 2xl:w-[80%] max-w-[100rem] py-5">
-        <p class="text-xl font-bold">Adauga proprietate</p>
-        <form action="" method="post">
+        <a href="/" class=" bg-[#222222] text-white text-[20px] px-4 py-[5.5px]">Inapoi</a>
+        <p class="text-xl font-bold my-5">Adauga proprietate</p>
+        <form action="/create" method="post">
+            @csrf
+            <input type="checkbox" name="exclusive" id="exclusive" value="1">
+            <label for="exclusive">Exclusiv</label>
             <div class="grid lg:grid-cols-3 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
                 <input type="text" name="title" placeholder="Titlu" class="border-b-[1px] border-black text-lg outline-none px-3">
                 <input type="number" name="price" placeholder="Pret" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <input type="text" name="comission" placeholder="Comision" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="comission" placeholder="Comision" class="border-b-[1px] border-black text-lg outline-none px-3">
             </div>
             <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
-                <input type="text" name="rooms" placeholder="Camere" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <input type="text" name="baths" placeholder="Bai" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <input type="text" name="space" placeholder="Spatiu" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <input type="text" name="year" placeholder="An" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="rooms" placeholder="Camere" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="baths" placeholder="Bai" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="space" placeholder="Spatiu" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="year" placeholder="An" class="border-b-[1px] border-black text-lg outline-none px-3">
             </div>
             <textarea name="description" placeholder="Descriere" id="" style="resize: none;" cols="30" rows="10" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10"></textarea>
             <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
-                <select name="city" id="city" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <select name="city" id="city" class="border-b-[1px] border-black text-lg outline-none px-3" onchange="getNeighborhoods()">
                     <option selected>Selecteaza orasul</option>
+                    @foreach($cities as $city)
+                    <option value="{{$city['id']}}">{{$city['city']}}</option>
+                    @endforeach
                 </select>
-                <select name="nh" id="nh" class="border-b-[1px] border-black text-lg outline-none px-3">
-                    <option selected>Selecteaza zona</option>
+                <select name="nh" id="neighborhoodSelect" class="border-b-[1px] border-black text-lg outline-none px-3">
                 </select>
                 <select name="type" id="type" class="border-b-[1px] border-black text-lg outline-none px-3">
                     <option selected>Selecteaza tipul</option>
@@ -78,4 +84,29 @@
         </script>
     </div>
 </div>
+
+<script>
+    function getNeighborhoods() {
+        var cityId = document.getElementById('city').value;
+        var neighborhoodSelect = document.getElementById('neighborhoodSelect');
+
+        // Clear previous options
+        neighborhoodSelect.innerHTML = '<option value="">Loading...</option>';
+
+        // Make AJAX request to fetch neighborhoods for the selected city
+        fetch('/get-neighborhoods/' + cityId)
+            .then(response => response.json())
+            .then(data => {
+                // Populate the options of the neighborhood select tag with received neighborhoods
+                neighborhoodSelect.innerHTML = '<option selected>Selecteaza zona</option>';
+                data.forEach(neighborhood => {
+                    neighborhoodSelect.innerHTML += '<option value="' + neighborhood.id + '">' + neighborhood.name + '</option>';
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching neighborhoods:', error);
+                neighborhoodSelect.innerHTML = '<option value="">Error fetching neighborhoods</option>';
+            });
+    }
+</script>
 @endsection

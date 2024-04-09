@@ -32,6 +32,13 @@ class PropertyController extends Controller
         return $zone;
     }
 
+    public function getNeighborhoods($id)
+    {
+        $getZones = Zone::where('city', $id)->orderBy('name')->get();
+
+        return $getZones;
+    }
+
     public static function getBackgroundImage($id)
     {
         $imgData = DB::table('images')
@@ -149,15 +156,47 @@ class PropertyController extends Controller
 
     public function create()
     {
-        return view('create');
+        $cities = City::all();
+        $zones  = Zone::all();
+
+        return view(
+            'create',
+            [
+                'cities' => $cities,
+                'zones'  => $zones
+            ]
+        );
     }
 
     public function modify($id)
     {
         $gatherInfo = Property::orderBy('id')->where('id', 1)->get();
 
+
         return view('modify', [
             'gatherInfo' => $gatherInfo
         ]);
+    }
+
+    public function store()
+    {
+        $property = new Property();
+        $property->type = request('type');
+        $property->saleType = request('selType');
+        $property->name = request('title');
+        $property->price = request('price');
+        $property->comission = request('comission');
+        $property->description = request('description');
+        $property->city = request('city');
+        $property->nh = request('nh');
+        $property->rooms = request('rooms');
+        $property->baths = request('baths');
+        $property->space = request('space');
+        $property->year = request('year');
+        $property->exclusive = request('exclusive');
+
+        $property->save();
+
+        return redirect('/');
     }
 }

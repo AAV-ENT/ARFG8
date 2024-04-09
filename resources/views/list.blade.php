@@ -3,7 +3,10 @@
 @section('content')
 <div class="w-full flex justify-center">
     <div class="w-full mx-2 2xl:w-[80%] max-w-[100rem] py-5">
-        <a href="/create"><button class="float-right block bg-[#23AE00] text-white px-4 py-1 font-bold w-[200px]">Adauga proprietate</button></a><br>
+        <div class="flex items-end w-full">
+            <a href="/zone"><button class="float-right block bg-[#23AE00] text-white px-4 py-1 mr-5 font-bold w-[200px]">Adauga zone</button></a><br>
+            <a href="/create"><button class="float-right block bg-[#23AE00] text-white px-4 py-1 font-bold w-[200px]">Adauga proprietate</button></a><br>
+        </div>
         <div class="shadow-lg w-full px-5 items-center mt-6 py-4">
             <form action="{{$currentURL}}" id="searchForm">
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
