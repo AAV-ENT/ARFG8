@@ -151,4 +151,13 @@ class PropertyController extends Controller
     {
         return view('create');
     }
+
+    public function modify($id)
+    {
+        $gatherInfo = Property::orderBy('id')->where('id', 1)->get();
+
+        return view('modify', [
+            'gatherInfo' => $gatherInfo
+        ]);
+    }
 }
