@@ -5,13 +5,16 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SpecController;
+use App\Http\Controllers\ModifyController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PropertyController::class, 'index']);
 
 Route::get('/get-neighborhoods/{id}', [PropertyController::class, 'getNeighborhoods']);
 
-Route::get('/modify/{id}', [PropertyController::class, 'modify']);
+Route::get('/modify/{id}', [ModifyController::class, 'index']);
+Route::get('/deleteImage/{$id}', [ImageController::class, 'destroy']);
 
 Route::get('/create', [PropertyController::class, 'create']);
 Route::post('/create', [PropertyController::class, 'store']);

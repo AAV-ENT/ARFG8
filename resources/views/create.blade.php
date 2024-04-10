@@ -6,65 +6,65 @@
     <div class="w-full mx-2 2xl:w-[80%] max-w-[100rem] py-5">
         <a href="/" class=" bg-[#222222] text-white text-[20px] px-4 py-[5.5px]">Inapoi</a>
         <p class="text-xl font-bold my-5">Adauga proprietate</p>
-        <!-- <form action="/create" method="post" enctype="multipart/form-data"> -->
-        @csrf
-        <input type="checkbox" name="exclusive" id="exclusive" value="1">
-        <label for="exclusive">Exclusiv</label>
-        <div class="grid lg:grid-cols-3 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
-            @php
-            $city = App\Http\Controllers\PropertyController::getLastId();
-            $lastId = $city[0]['id'];
-            @endphp
-            <input type="hidden" name="id" value="{{$lastId}}">
-            <input type="text" name="title" placeholder="Titlu" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" name="price" placeholder="Pret" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" name="comission" placeholder="Comision" class="border-b-[1px] border-black text-lg outline-none px-3">
-        </div>
-        <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
-            <input type="number" name="rooms" placeholder="Camere" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" name="baths" placeholder="Bai" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" name="space" placeholder="Spatiu" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" name="year" placeholder="An" class="border-b-[1px] border-black text-lg outline-none px-3">
-        </div>
-        <textarea name="description" placeholder="Descriere" id="" style="resize: none;" cols="30" rows="10" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10"></textarea>
-        <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
-            <select name="city" id="city" class="border-b-[1px] border-black text-lg outline-none px-3" onchange="getNeighborhoods()">
-                <option selected>Selecteaza orasul</option>
-                @foreach($cities as $city)
-                <option value="{{$city['id']}}">{{$city['city']}}</option>
-                @endforeach
-            </select>
-            <select name="nh" id="neighborhoodSelect" class="border-b-[1px] border-black text-lg outline-none px-3">
-            </select>
-            <select name="type" id="type" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <option selected>Selecteaza tipul</option>
-                <option value="1">Comercial</option>
-                <option value="2">Proiect</option>
-                <option value="3">Apartament</option>
-                <option value="4">Vila</option>
-                <option value="5">Teren</option>
-            </select>
-            <select name="selType" id="selType" class="border-b-[1px] border-black text-lg outline-none px-3">
-                <option selected>Vanzare/Inchiriere</option>
-                <option value="1">Vanzare</option>
-                <option value="2">Inchiriere</option>
-            </select>
-        </div>
-        <div class="grid md:grid-cols-2 gap-5 grid-cols-1 mt-10">
-            <input type="text" id="long" name="long" placeholder="Longitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
-            <input type="number" id="lat" name="lat" placeholder="Latitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
-        </div>
-        <textarea name="specs" placeholder="Specificatii (despartite prin ';')" id="specs" style="resize: none;" rows="5" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10"></textarea>
-        <p class="mt-6">Toate pozele trebuiesc selectate deodata. (Prima poza selectata este poza principala)</p>
-        <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
-            <div class="flex flex-col items-start">
-                <input type="file" id="fileInput" name="photos[]" multiple accept="image/png, image/jpeg, image/jpg, image/avif">
-                <input type="submit" onclick="saveAll(this)" data-lastid="{{$lastId}}" value="Salvează" class="mt-6 text-[20px] bg-green-600 cursor-pointer px-6 py-1 font-bold text-white">
+        <form action="/create" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="checkbox" name="exclusive" id="exclusive" value="1">
+            <label for="exclusive">Exclusiv</label>
+            <div class="grid lg:grid-cols-3 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
+                @php
+                $city = App\Http\Controllers\PropertyController::getLastId();
+                $lastId = $city[0]['id'];
+                @endphp
+                <input type="hidden" name="id" value="{{$lastId}}">
+                <input type="text" name="title" placeholder="Titlu" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="price" placeholder="Pret" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="comission" placeholder="Comision" class="border-b-[1px] border-black text-lg outline-none px-3">
             </div>
-            <div id="fileNames">
+            <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
+                <input type="number" name="rooms" placeholder="Camere" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="baths" placeholder="Bai" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="space" placeholder="Spatiu" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" name="year" placeholder="An" class="border-b-[1px] border-black text-lg outline-none px-3">
+            </div>
+            <textarea name="description" placeholder="Descriere" id="" style="resize: none;" cols="30" rows="10" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10"></textarea>
+            <div class="grid lg:grid-cols-4 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
+                <select name="city" id="city" class="border-b-[1px] border-black text-lg outline-none px-3" onchange="getNeighborhoods()">
+                    <option selected>Selecteaza orasul</option>
+                    @foreach($cities as $city)
+                    <option value="{{$city['id']}}">{{$city['city']}}</option>
+                    @endforeach
+                </select>
+                <select name="nh" id="neighborhoodSelect" class="border-b-[1px] border-black text-lg outline-none px-3">
+                </select>
+                <select name="type" id="type" class="border-b-[1px] border-black text-lg outline-none px-3">
+                    <option selected>Selecteaza tipul</option>
+                    <option value="1">Comercial</option>
+                    <option value="2">Proiect</option>
+                    <option value="3">Apartament</option>
+                    <option value="4">Vila</option>
+                    <option value="5">Teren</option>
+                </select>
+                <select name="selType" id="selType" class="border-b-[1px] border-black text-lg outline-none px-3">
+                    <option selected>Vanzare/Inchiriere</option>
+                    <option value="1">Vanzare</option>
+                    <option value="2">Inchiriere</option>
+                </select>
+            </div>
+            <div class="grid md:grid-cols-2 gap-5 grid-cols-1 mt-10">
+                <input type="text" id="long" name="long" placeholder="Longitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
+                <input type="number" id="lat" name="lat" placeholder="Latitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
+            </div>
+            <textarea name="specs" placeholder="Specificatii (despartite prin ';')" id="specs" style="resize: none;" rows="5" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10"></textarea>
+            <p class="mt-6">Toate pozele trebuiesc selectate deodata. (Prima poza selectata este poza principala)</p>
+            <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
+                <div class="flex flex-col items-start">
+                    <input type="file" id="fileInput" name="photos[]" multiple accept="image/png, image/jpeg, image/jpg, image/avif">
+                    <input type="submit" onclick="saveAll(this)" data-lastid="{{$lastId}}" value="Salvează" class="mt-6 text-[20px] bg-green-600 cursor-pointer px-6 py-1 font-bold text-white">
+                </div>
+                <div id="fileNames">
 
+                </div>
             </div>
-        </div>
         </form>
         <script>
             document.getElementById('fileInput').addEventListener('change', function(event) {
