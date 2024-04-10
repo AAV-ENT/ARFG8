@@ -9,6 +9,8 @@ use App\Models\City;
 use App\Models\Image;
 use App\Models\Zone;
 
+use function Laravel\Prompts\error;
+
 class PropertyController extends Controller
 {
     public static function getCityName($id)
@@ -62,6 +64,13 @@ class PropertyController extends Controller
                 echo '<option value="' . $city['id'] . '-' . $zone['id'] . '" class="capitalize bg-[#e3e3e3]">' . $zone['name'] . '</option>';
             }
         }
+    }
+
+    public static function getLastId()
+    {
+        $lastId = DB::table('property')->orderBy('id', 'desc')->get();
+        $lastId = json_decode(json_encode($lastId), true);
+        return $lastId;
     }
 
     public function index()
@@ -178,9 +187,13 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $property = new Property();
+
+        $id = request('id') + 1;
+
+        $property->id = $id;
         $property->type = request('type');
         $property->saleType = request('selType');
         $property->name = request('title');
@@ -196,6 +209,35 @@ class PropertyController extends Controller
         $property->exclusive = request('exclusive');
 
         $property->save();
+
+
+        $elementNumber = 0;
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $file) {
+                $name = $file->getClientOriginalName();
+                if ($file->move('assets/img/properties/', $name)) {
+                    if ($elementNumber == 0) {
+                        $image = new Image();
+                        $image->imageName = $name;
+                        $image->property = $id;
+                        $image->main = 1;
+
+                        $elementNumber++;
+
+                        $image->save();
+                    } else {
+                        $image = new Image();
+                        $image->imageName = $name;
+                        $image->property = $id;
+                        $image->main = 0;
+
+                        $image->save();
+                    }
+                }
+            }
+        }
+
 
         return redirect('/');
     }

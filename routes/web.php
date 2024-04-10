@@ -3,6 +3,8 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ZoneController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SpecController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PropertyController::class, 'index']);
@@ -18,3 +20,6 @@ Route::get('/zone', [ZoneController::class, 'index']);
 
 Route::post('/saveCity/{name}', [CityController::class, 'store']);
 Route::post('/saveZone/{cityId}/{name}', [ZoneController::class, 'store']);
+
+Route::post('/location/{lat}/{long}/{id}', [LocationController::class, 'store']);
+Route::post('/specs/{specs}/{id}', [SpecController::class, 'store']);
