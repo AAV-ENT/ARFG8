@@ -14,7 +14,7 @@ Route::get('/', [PropertyController::class, 'index']);
 Route::get('/get-neighborhoods/{id}', [PropertyController::class, 'getNeighborhoods']);
 
 Route::get('/modify/{id}', [ModifyController::class, 'index']);
-Route::get('/deleteImage/{$id}', [ImageController::class, 'destroy']);
+Route::delete('/delete-image/{id}', [ImageController::class, 'destroy']);
 
 Route::get('/create', [PropertyController::class, 'create']);
 Route::post('/create', [PropertyController::class, 'store']);

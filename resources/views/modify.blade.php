@@ -86,11 +86,12 @@
             <textarea name="specs" placeholder="Specificatii (despartite prin ';')" id="specs" style="resize: none;" rows="5" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10">{{$specInfo}}</textarea>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-4 w-full my-6">
                 @foreach($imagesInfo as $images)
+
                 <div>
                     <img src="https://andimob.ro/assets/img/properties/{{$images['imageName']}}" alt="">
-                    <form action="/deleteImage/{{$images['id']}}" method="post">
+                    <form action="/delete-image/{{$images['id']}}" method="post">
                         @csrf
-                        @method('DELETE')
+                        @method('delete')
                         <button class="w-full mt-2 bg-[#222222] text-white">Sterge imaginea</button>
                     </form>
                 </div>

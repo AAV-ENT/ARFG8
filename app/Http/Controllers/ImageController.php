@@ -10,10 +10,14 @@ class ImageController extends Controller
 {
     public function destroy($id)
     {
-        $image = Image::findOrFail($id)->get();
+        $image = Image::findOrFail($id);
 
-
-        $image->delete();
+        if ($image['main'] == 0) {
+            $image->delete();
+        } else {
+            $allImages = Image::where('property', $image['property'])->where('main', 0)->where('id', '!=', $id)->get();
+            dd($allImages);
+        }
 
         return redirect()->back();
     }
