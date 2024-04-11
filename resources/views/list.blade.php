@@ -88,12 +88,23 @@
             @php
             $type = $property['type'];
             $saleType = $property['saleType'];
-            if ($saleType == 1) {
+            if($property['active'] == 0 && $saleType == 1) {
+            $saleDisplay = $property['price'];
+            $saleTypeDis = 'INACTIV';
+            $bgColo = 'bg-red-600';
+            } elseif($property['active'] == 0 && $saleType == 2) {
+            $saleDisplay = $property['price'] . '/lună';
+            $saleTypeDis = 'De INACTIV';
+            $bgColo = 'bg-red-600';
+            }
+            elseif ($saleType == 1) {
             $saleDisplay = $property['price'];
             $saleTypeDis = 'De vanzare';
-            } else {
+            $bgColo = 'bg-[#222222]';
+            } elseif($saleType == 2) {
             $saleDisplay = $property['price'] . '/lună';
             $saleTypeDis = 'De inchiriat';
+            $bgColo = 'bg-[#222222]';
             }
 
             switch ($type) {
@@ -189,7 +200,7 @@
                 </div>
                 <div class="px-3 w-full">
                     <div class="flex justify-between mb-1">
-                        <p class="w-[49%] cursor-pointer text-center text-white bg-[#222222] uppercase">{{ $saleTypeDis }}</p>
+                        <p class="w-[49%] cursor-pointer text-center text-white {{ $bgColo }} uppercase">{{ $saleTypeDis }}</p>
                         <a href="/modify/{{ $property->id }}" class="w-[49%] cursor-pointer text-center text-white bg-[#D57B01]">MODIFICA</a>
                     </div>
                 </div>

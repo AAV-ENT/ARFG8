@@ -137,6 +137,7 @@ class PropertyController extends Controller
         if ($showAll != true) {
             $gatherInfo = $gatherInfo->skip($page * 8)
                 ->take(8)
+                ->orderBy('active', 'DESC')
                 ->get();
         } else {
             $gatherInfo = $gatherInfo->get();

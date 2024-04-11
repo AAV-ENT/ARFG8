@@ -84,6 +84,19 @@
                 <input type="number" id="lat" name="lat" value="{{$locationInfo[0]['lat']}}" placeholder="Latitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
             </div>
             <textarea name="specs" placeholder="Specificatii (despartite prin ';')" id="specs" style="resize: none;" rows="5" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10">{{$specInfo}}</textarea>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-4 w-full my-6">
+                @foreach($imagesInfo as $images)
+
+                <div>
+                    <img src="https://andimob.ro/assets/img/properties/{{$images['imageName']}}" alt="">
+                    <form action="/delete-image/{{$images['id']}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="w-full mt-2 bg-[#222222] text-white">Sterge imaginea</button>
+                    </form>
+                </div>
+                @endforeach
+            </div>
             <p class="mt-6">Toate pozele trebuiesc selectate deodata. (Prima poza selectata este poza principala)</p>
             <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
                 <div class="flex flex-col items-start">
