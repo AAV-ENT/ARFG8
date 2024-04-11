@@ -184,7 +184,8 @@ class PropertyController extends Controller
 
 
         return view('modify', [
-            'gatherInfo' => $gatherInfo
+            'gatherInfo' => $gatherInfo,
+            'id' => $id
         ]);
     }
 
