@@ -9,7 +9,7 @@
         <form action="/create" method="post" enctype="multipart/form-data">
             @csrf
             <input type="checkbox" name="exclusive" id="exclusive" value="1">
-            <label for="exclusive">Exclusiv</label>
+            <label for="exclusive" class="text-xl">Exclusiv</label>
             <div class="grid lg:grid-cols-3 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
                 @php
                 $city = App\Http\Controllers\PropertyController::getLastId();

@@ -4,12 +4,20 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="w-full flex justify-center">
     <div class="w-full mx-2 2xl:w-[80%] max-w-[100rem] py-5">
-        <a href="/" class=" bg-[#222222] text-white text-[20px] px-4 py-[5.5px]">Inapoi</a>
-        <p class="text-xl font-bold my-5">Adauga proprietate</p>
-        <form action="/update" method="post" enctype="multipart/form-data">
+        <div class="flex">
+            <a href="/" class=" bg-[#222222] text-white text-[20px] px-4 py-[5.5px]">Inapoi</a>
+            <form action="/inactive/{{ $propertyInfo[0]['id'] }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <button class=" bg-red-600 ml-3 text-white text-[20px] px-4 py-[5.5px]">Dezactiveaza proprietatea</button>
+            </form>
+        </div>
+        <p class="text-xl font-bold my-5">Modifica proprietate</p>
+        <form action="/modify/{{ $propertyInfo[0]['id'] }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <input type="checkbox" name="exclusive" id="exclusive" value="1">
-            <label for="exclusive">Exclusiv</label>
+            <label for="exclusive" class="text-xl">Exclusiv</label>
             <div class="grid lg:grid-cols-3 gap-5 md:grid-cols-2 grid-cols-1 mt-10">
                 @php
                 $city = App\Http\Controllers\PropertyController::getLastId();
@@ -52,17 +60,17 @@
                     @else
                     <option value="2">Proiect</option>
                     @endif
-                    @if($propertyInfo[0]['type'] == 3)
+                    @if($propertyInfo[0]['type'] == 4)
                     <option value="3" selected>Apartament</option>
                     @else
                     <option value="3">Apartament</option>
                     @endif
-                    @if($propertyInfo[0]['type'] == 4)
+                    @if($propertyInfo[0]['type'] == 5)
                     <option value="4" selected>Vila</option>
                     @else
                     <option value="4">Vila</option>
                     @endif
-                    @if($propertyInfo[0]['type'] == 4)
+                    @if($propertyInfo[0]['type'] == 6)
                     <option value="5" selected>Teren</option>
                     @else
                     <option value="5">Teren</option>
@@ -84,19 +92,6 @@
                 <input type="number" id="lat" name="lat" value="{{$locationInfo[0]['lat']}}" placeholder="Latitudine" class="border-b-[1px] border-black text-lg outline-none px-3">
             </div>
             <textarea name="specs" placeholder="Specificatii (despartite prin ';')" id="specs" style="resize: none;" rows="5" class="p-3 border-[1px] border-black text-lg outline-none w-full mt-10">{{$specInfo}}</textarea>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-4 w-full my-6">
-                @foreach($imagesInfo as $images)
-
-                <div>
-                    <img src="https://andimob.ro/assets/img/properties/{{$images['imageName']}}" alt="">
-                    <form action="/delete-image/{{$images['id']}}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="w-full mt-2 bg-[#222222] text-white">Sterge imaginea</button>
-                    </form>
-                </div>
-                @endforeach
-            </div>
             <p class="mt-6">Toate pozele trebuiesc selectate deodata. (Prima poza selectata este poza principala)</p>
             <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
                 <div class="flex flex-col items-start">
@@ -108,7 +103,90 @@
                 </div>
             </div>
         </form>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-4 w-full my-6">
+            @foreach($imagesInfo as $images)
+
+            <div>
+                <img src="https://andimob.ro/assets/img/properties/{{$images['imageName']}}" alt="">
+                <form action="/delete-image/{{$images['id']}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="w-full mt-2 bg-[#222222] text-white">Sterge imaginea</button>
+                </form>
+            </div>
+            @endforeach
+        </div>
         <script>
+            function saveSpecs(element) {
+                var lastId = parseInt(element.dataset.lastid);
+
+                var long = document.getElementById('long').value;
+                var lat = document.getElementById('lat').value;
+
+                var specs = document.getElementById('specs').value;
+
+                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                fetch('/update-specs/' + specs + '/' + lastId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to save data');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Data saved successfully:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error saving data:', error);
+                    });
+            }
+
+            function saveLocation(element) {
+                var lastId = parseInt(element.dataset.lastid);
+
+                var long = document.getElementById('long').value;
+                var lat = document.getElementById('lat').value;
+
+                var specs = document.getElementById('specs').value;
+
+                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                fetch('/update-location/' + lat + '/' + long + '/' + lastId, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to save data');
+                        }
+                    })
+                    .then(data => {
+                        console.log('Data saved successfully:', data);
+                        location.reload()
+                    })
+                    .catch(error => {
+                        console.error('Error saving data:', error);
+                    });
+            }
+
+            function saveAll(element) {
+                saveSpecs(element)
+                saveLocation(element)
+            }
+
             document.getElementById('fileInput').addEventListener('change', function(event) {
                 const files = event.target.files;
                 const fileNamesDiv = document.getElementById('fileNames');

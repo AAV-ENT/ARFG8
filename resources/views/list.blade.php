@@ -94,7 +94,7 @@
             $bgColo = 'bg-red-600';
             } elseif($property['active'] == 0 && $saleType == 2) {
             $saleDisplay = $property['price'] . '/lună';
-            $saleTypeDis = 'De INACTIV';
+            $saleTypeDis = 'INACTIV';
             $bgColo = 'bg-red-600';
             }
             elseif ($saleType == 1) {

@@ -13,6 +13,11 @@ use function Laravel\Prompts\error;
 
 class PropertyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public static function getCityName($id)
     {
         $cityData = DB::table('cities')

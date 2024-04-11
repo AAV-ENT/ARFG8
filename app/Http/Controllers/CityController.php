@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store($name)
     {
         $city = new City();

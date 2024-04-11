@@ -87,6 +87,20 @@
                     <a href="https://andimob.ro/properties.php?sel_type=0&sel_imb=0&sel_loc=0" class="text-white mr-5 hover:text-[#D57B01]">PROPRIETATI</a>
                     <a href="https://andimob.ro/about.php" class="text-white mr-5 hover:text-[#D57B01]">DESPRE NOI</a>
                     <a href="https://andimob.ro/contact.php" class="text-white mr-5 hover:text-[#D57B01]">CONTACT</a>
+                    @guest
+                    @if (Route::has('login'))
+                    <a class="text-white mr-5 hover:text-[#D57B01]" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
+                    @endif
+                    @else
+                    <a class="text-white mr-5 hover:text-[#D57B01]" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('LOGOUT') }}
+                    </a>
+                    @endguest
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
                 <div class="block md:hidden">
                     <svg width="32" height="16" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="openMenu()">
