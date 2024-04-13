@@ -88,7 +88,7 @@ class ModifyController extends Controller
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $file) {
                 $name = $file->getClientOriginalName();
-                if ($file->move('assets/img/properties/', $name)) {
+                if ($file->move(public_path('assets/img/properties/'), $name)) {
                     if ($elementNumber == 0 && $mainExist == false) {
                         $image = new Image();
                         $image->imageName = $name;
