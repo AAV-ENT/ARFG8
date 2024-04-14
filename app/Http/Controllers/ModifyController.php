@@ -121,31 +121,23 @@ class ModifyController extends Controller
 
     public function updateSpec($param, $id)
     {
-        // Delete existing specs for the property
         $this->deleteSpecs($id);
 
-        // Initialize the spec counter
         $specNum = 0;
 
-        // Split the parameter into an array of specs
         $specs = array_map('trim', explode(';', $param));
 
-        // Loop through each spec
         foreach ($specs as $specName) {
-            // Create a new Spec instance
             $spec = new Spec();
 
-            // Set the spec attributes
             $spec->name = $specName;
             $spec->property = $id;
 
-            // Save the spec
             if ($spec->save()) {
                 $specNum++;
             }
         }
 
-        // Check if all specs were saved successfully
         if ($specNum == sizeof($specs)) {
             return response()->json(['message' => 'Specs saved successfully'], 200);
         } else {
@@ -174,7 +166,11 @@ class ModifyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        $property->active = 0;
+        if ($property->active == 1) {
+            $property->active = 0;
+        } else {
+            $property->active = 1;
+        }
 
         $property->update();
 

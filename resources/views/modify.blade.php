@@ -9,7 +9,11 @@
             <form action="/inactive/{{ $propertyInfo[0]['id'] }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                @if($propertyInfo[0]['active'] == 1)
                 <button class=" bg-red-600 ml-3 text-white text-[20px] px-4 py-[5.5px]">Dezactiveaza proprietatea</button>
+                @else
+                <button class=" bg-green-600 ml-3 text-white text-[20px] px-4 py-[5.5px]">Activeaza proprietatea</button>
+                @endif
             </form>
         </div>
         <p class="text-xl font-bold my-5">Modifica proprietate</p>
