@@ -139,7 +139,7 @@ class property extends database
                 } else {
                     $whereClause = !empty($whereClauses) ? 'WHERE ' . implode(' AND ', $whereClauses) : '';
 
-                    $sql = "SELECT * FROM property" . $whereClause . " " . $orderBy . " " . $limit;
+                    $sql = "SELECT * FROM property " . $whereClause . " " . $orderBy . " " . $limit;
 
                     $result = $this->connect()->prepare($sql);
                     $result->execute($params);
@@ -151,7 +151,7 @@ class property extends database
         } else {
             $whereClause = !empty($whereClauses) ? 'WHERE ' . implode(' AND ', $whereClauses) : '';
 
-            $sql = "SELECT * FROM property" . $whereClause . " " . $orderBy . " " . $limit;
+            $sql = "SELECT * FROM property " . $whereClause . " " . $orderBy . " " . $limit;
             $result = $this->connect()->prepare($sql);
             $result->execute($params);
             return $result;
@@ -160,17 +160,7 @@ class property extends database
 
     protected function lastSix()
     {
-        $sql = "SELECT * FROM property WHERE active = 1 ORDER BY id DESC LIMIT 0, 6 ";
-
-        $result = $this->connect()->prepare($sql);
-        $result->execute();
-
-        return $result;
-    }
-
-    protected function getAllLocation()
-    {
-        $sql = "SELECT lat, lng, property FROM location";
+        $sql = "SELECT * FROM property ORDER BY id DESC LIMIT 0, 6 ";
 
         $result = $this->connect()->prepare($sql);
         $result->execute();
